@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whistle Counter Pro 🍚🚀</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    <div class="container">
+        <header>
+            <h1>WHISTLE COUNTER PRO 🍚🚀</h1>
+        </header>
+
+        <section class="controls">
+            <button class="mode-toggle" onclick="toggleMode()">Switch to Cooking Mode</button>
+            <button class="voice-btn" onclick="startVoiceRecognition()">🎙️ Voice Commands</button>
+        </section>
+
+        <!-- Free Mode Section -->
+        <section class="mode-section free-section" id="freeMode">
+            <div class="input-group">
+                <label for="timeSelect">⏳ Set Timer (Optional):</label>
+                <select id="timeSelect">
+                    <option value="0">No Timer</option>
+                    <option value="10">10 sec</option>
+                    <option value="30">30 sec</option>
+                    <option value="60">1 min</option>
+                    <option value="120">2 min</option>
+                    <option value="300">5 min</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="maxWhistles">🎯 Max Whistles:</label>
+                <input type="number" id="maxWhistles" min="1" value="10" placeholder="Enter max whistles">
+            </div>
+        </section>
+
+        <!-- Cooking Mode Section -->
+        <section class="mode-section cooking-section" id="cookingMode">
+            <div class="input-group">
+                <label for="dishSelect">🍲 Select Dish:</label>
+                <select id="dishSelect" onchange="updateCookingRecommendation()">
+                    <option value="rice">Rice</option>
+                    <option value="lentils">Lentils</option>
+                    <option value="vegetables">Vegetables</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="quantity">⚖️ Quantity (cups):</label>
+                <input type="number" id="quantity" min="1" value="1" onchange="updateCookingRecommendation()" placeholder="Enter cups">
+            </div>
+            <div class="box recommendation-box">
+                Recommended: <span id="recommendedWhistles">2</span> whistles, <span id="recommendedTime">600</span> sec
+            </div>
+        </section>
+
+        <div class="progress-circle">
+            <svg width="100" height="100">
+                <circle class="progress-bg" r="45" cx="50" cy="50"></circle>
+                <circle class="progress-fill" r="45" cx="50" cy="50" stroke-dasharray="283" stroke-dashoffset="283"></circle>
+            </svg>
+            <div class="progress-text" id="timer">0</div>
+        </div>
+
+        <div class="box counter-box">
+            Whistle Count: <span id="counter">0</span>
+        </div>
+
+        <section class="action-buttons">
+            <button class="start-btn" onclick="startListening()">▶ Start</button>
+            <button class="stop-btn" onclick="stopListening()">⏹ Stop</button>
+            <button class="theme-btn" onclick="toggleTheme()">🌙 Theme</button>
+            <button class="language-btn" onclick="toggleLanguage()">🌐 Language</button>
+        </section>
+
+        <div class="watermark">Raj</div>
+
+        <audio id="whistleSound" src="https://www.myinstants.com/media/sounds/whistle.mp3"></audio>
+        <audio id="alarmSound" src="https://www.myinstants.com/media/sounds/alarm.mp3"></audio>
+
+        <div class="stats" id="stats">
+            <h2>📊 Session Stats</h2>
+            <p>Total Whistles: <span id="totalWhistles">0</span></p>
+            <p>Time Taken: <span id="timeTaken">0</span> sec</p>
+            <button onclick="closeStats()">Close</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
